@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubu ❤️ Walentynki</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 6s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .characters {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .character {
+            font-size: 120px;
+            animation: bounce 2s infinite;
+        }
+
+        .bubu {
+            animation-delay: 0s;
+        }
+
+        .dudu {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        h1 {
+            color: #ff1493;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+        }
+
+        .question {
+            font-size: 1.5em;
+            color: #ff69b4;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 200px;
+            position: relative;
+            padding: 20px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+        }
+
+        #noBtn {
+            background: linear-gradient(135deg, #ddd 0%, #bbb 100%);
+            color: #666;
+            position: relative;
+            z-index: 2;
+            transition: left 0.3s ease, top 0.3s ease;
+        }
+        
+        #noBtn.moving {
+            position: absolute;
+            z-index: 3;
+        }
+
+        #noBtn:hover {
+            background: linear-gradient(135deg, #ccc 0%, #aaa 100%);
+        }
+
+        .celebration {
+            display: none;
+            text-align: center;
+        }
+
+        .celebration h2 {
+            color: #ff1493;
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .celebration p {
+            font-size: 1.5em;
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        .love-gif {
+            font-size: 100px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-background" id="hearts"></div>
+    
+    <div class="container">
+        <div id="questionSection">
+            <div class="characters">
+                <div class="character bubu">🐻</div>
+                <div style="font-size: 80px;">❤️</div>
+                <div class="character dudu">🐼</div>
+            </div>
+            
+            <h1>Witaj Bubu! 💕</h1>
+            <p class="question">Czy chcesz zostać moją Walentynką?</p>
+            
+            <div class="buttons-container">
+                <button id="yesBtn">Tak! ❤️</button>
+                <button id="noBtn">Nie</button>
+            </div>
+        </div>
+
+        <div class="celebration" id="celebration">
+            <h2>Yay! 🎉💕🎉</h2>
+            <div class="characters">
+                <div class="character">🐻</div>
+                <div class="love-gif">💖</div>
+                <div class="character">🐼</div>
+            </div>
+            <p>Kocham Cię, moja Walentynko! ❤️</p>
+            <p style="font-size: 1.2em;">Bubu i Dudu na zawsze razem! 🐻💕🐼</p>
+        </div>
+    </div>
+
+    <script>
+        // Tworzymy unoszące się serduszka w tle
+        const heartsContainer = document.getElementById('hearts');
+        for (let i = 0; i < 15; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = '💕';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 3 + 's';
+            heartsContainer.appendChild(heart);
+        }
+
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const questionSection = document.getElementById('questionSection');
+        const celebration = document.getElementById('celebration');
+        let yesBtnSize = 1;
+        let isMoving = false;
+        let mouseX = 0;
+        let mouseY = 0;
+
+        // Śledź pozycję myszy
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Funkcja do przesuwania przycisku "Nie"
+        function moveNoButton() {
+            if (!isMoving) {
+                // Zapisz aktualną pozycję przed zmianą na absolute
+                const currentRect = noBtn.getBoundingClientRect();
+                const containerRect = document.querySelector('.buttons-container').getBoundingClientRect();
+                
+                noBtn.classList.add('moving');
+                noBtn.style.left = (currentRect.left - containerRect.left) + 'px';
+                noBtn.style.top = (currentRect.top - containerRect.top) + 'px';
+                isMoving = true;
+                
+                // Małe opóźnienie, żeby przeglądarka zastosowała position: absolute
+                setTimeout(() => {
+                    actuallyMoveButton();
+                }, 10);
+                return;
+            }
+            
+            actuallyMoveButton();
+        }
+        
+        function actuallyMoveButton() {
+            const container = document.querySelector('.buttons-container');
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            const yesBtnRect = yesBtn.getBoundingClientRect();
+            
+            const padding = 20;
+            const minDistanceFromMouse = 120; // Minimalna odległość od myszy
+            
+            let newX, newY;
+            let attempts = 0;
+            const maxAttempts = 100;
+            
+            // Szukaj losowej pozycji, która jest wystarczająco daleko od myszy i od przycisku "Tak"
+            do {
+                const maxX = containerRect.width - btnRect.width - 40;
+                const maxY = containerRect.height - btnRect.height - 40;
+                
+                newX = Math.random() * maxX + 20;
+                newY = Math.random() * maxY + 20;
+                
+                // Środek przycisku w nowej pozycji
+                const btnCenterX = containerRect.left + newX + btnRect.width / 2;
+                const btnCenterY = containerRect.top + newY + btnRect.height / 2;
+                
+                // Sprawdź, czy nie nachodzi na przycisk "Tak"
+                const futureRect = {
+                    left: containerRect.left + newX,
+                    right: containerRect.left + newX + btnRect.width,
+                    top: containerRect.top + newY,
+                    bottom: containerRect.top + newY + btnRect.height
+                };
+                
+                const noOverlapYes = (
+                    futureRect.right + padding < yesBtnRect.left ||
+                    futureRect.left - padding > yesBtnRect.right ||
+                    futureRect.bottom + padding < yesBtnRect.top ||
+                    futureRect.top - padding > yesBtnRect.bottom
+                );
+                
+                // Oblicz odległość od myszy
+                const distanceToMouse = Math.sqrt(
+                    Math.pow(btnCenterX - mouseX, 2) + 
+                    Math.pow(btnCenterY - mouseY, 2)
+                );
+                
+                // Sprawdź czy jest wystarczająco daleko od myszy i nie nachodzi na "Tak"
+                if (noOverlapYes && distanceToMouse >= minDistanceFromMouse) {
+                    break;
+                }
+                
+                attempts++;
+            } while (attempts < maxAttempts);
+            
+            // Jeśli nie znaleziono dobrej pozycji po 100 próbach, znajdź cokolwiek z dala od myszy
+            if (attempts >= maxAttempts) {
+                const corners = [
+                    { x: 20, y: 20 },
+                    { x: containerRect.width - btnRect.width - 20, y: 20 },
+                    { x: 20, y: containerRect.height - btnRect.height - 20 },
+                    { x: containerRect.width - btnRect.width - 20, y: containerRect.height - btnRect.height - 20 },
+                    { x: containerRect.width / 2 - btnRect.width / 2, y: 20 },
+                    { x: containerRect.width / 2 - btnRect.width / 2, y: containerRect.height - btnRect.height - 20 }
+                ];
+                
+                // Wybierz losowy róg/pozycję z dala od myszy
+                const validCorners = corners.filter(corner => {
+                    const cornerCenterX = containerRect.left + corner.x + btnRect.width / 2;
+                    const cornerCenterY = containerRect.top + corner.y + btnRect.height / 2;
+                    const dist = Math.sqrt(
+                        Math.pow(cornerCenterX - mouseX, 2) + 
+                        Math.pow(cornerCenterY - mouseY, 2)
+                    );
+                    return dist >= minDistanceFromMouse;
+                });
+                
+                if (validCorners.length > 0) {
+                    const randomCorner = validCorners[Math.floor(Math.random() * validCorners.length)];
+                    newX = randomCorner.x;
+                    newY = randomCorner.y;
+                }
+            }
+            
+            noBtn.style.left = newX + 'px';
+            noBtn.style.top = newY + 'px';
+            
+            // Powiększ przycisk "Tak"
+            yesBtnSize += 0.2;
+            yesBtn.style.transform = `scale(${yesBtnSize})`;
+        }
+
+        // Przycisk "Nie" ucieka przed kursorem
+        noBtn.addEventListener('mouseenter', moveNoButton);
+        
+        // Na urządzeniach dotykowych - przesuwa się po dotknięciu
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        // Przycisk "Nie" - dodatkowe próby kliknięcia
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        // Przycisk "Tak" - pokazuje celebrację
+        yesBtn.addEventListener('click', () => {
+            questionSection.style.display = 'none';
+            celebration.style.display = 'block';
+            
+            // Dodaj więcej serduszek przy akceptacji
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.style.position = 'fixed';
+                    heart.style.left = Math.random() * window.innerWidth + 'px';
+                    heart.style.top = '-50px';
+                    heart.style.fontSize = '30px';
+                    heart.textContent = ['❤️', '💕', '💖', '💗', '💓'][Math.floor(Math.random() * 5)];
+                    heart.style.zIndex = '1000';
+                    heart.style.pointerEvents = 'none';
+                    document.body.appendChild(heart);
+                    
+                    let pos = -50;
+                    const fall = setInterval(() => {
+                        pos += 5;
+                        heart.style.top = pos + 'px';
+                        heart.style.transform = `rotate(${pos}deg)`;
+                        
+                        if (pos > window.innerHeight) {
+                            clearInterval(fall);
+                            heart.remove();
+                        }
+                    }, 20);
+                }, i * 100);
+            }
+        });
+    </script>
+</body>
+</html>
