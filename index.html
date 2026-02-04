@@ -193,7 +193,7 @@
     <div class="container">
         <div id="questionSection">
             <div class="characters">
-                <img src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif" alt="Bubu z różami" class="character-image">
+                <img src="https://gifdb.com/images/high/dudu-flower-gif-yitf1hqqfp67l648.webp" alt="Dudu z kwiatkiem" class="character-image">
             </div>
             
             <h1>Witaj Bubu! 💕</h1>
@@ -208,7 +208,7 @@
         <div class="celebration" id="celebration">
             <h2>Yay! 🎉💕🎉</h2>
             <div class="characters">
-                <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Bubu i Dudu całują się" class="character-image">
+                <img src="https://gifdb.com/images/high/bubu-dudu-kisses-gif-is9hkhalbwsesdkn.webp" alt="Bubu i Dudu całują się" class="character-image">
             </div>
             <p>Kocham Cię, moja Walentynko! ❤️</p>
             <p style="font-size: 1.2em;">Bubu i Dudu na zawsze razem! 💕</p>
@@ -236,12 +236,44 @@
         let isMoving = false;
         let mouseX = 0;
         let mouseY = 0;
+        let lastMoveTime = 0;
+        const moveThrottleDelay = 500; // Minimalna przerwa między ruchami (500ms)
 
         // Śledź pozycję myszy
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
+            
+            // Sprawdź odległość od przycisku "Nie" podczas ruchu myszy
+            if (isMoving) {
+                checkProximityAndMove();
+            }
         });
+        
+        // Funkcja sprawdzająca czy mysz jest za blisko przycisku
+        function checkProximityAndMove() {
+            const currentTime = Date.now();
+            
+            // Sprawdź czy minęło wystarczająco czasu od ostatniego ruchu
+            if (currentTime - lastMoveTime < moveThrottleDelay) {
+                return; // Zbyt wcześnie, nie ruszaj przycisku
+            }
+            
+            const btnRect = noBtn.getBoundingClientRect();
+            const btnCenterX = btnRect.left + btnRect.width / 2;
+            const btnCenterY = btnRect.top + btnRect.height / 2;
+            
+            const distanceToButton = Math.sqrt(
+                Math.pow(btnCenterX - mouseX, 2) + 
+                Math.pow(btnCenterY - mouseY, 2)
+            );
+            
+            // Jeśli mysz jest bliżej niż 100px od przycisku, przesuń go
+            if (distanceToButton < 100) {
+                lastMoveTime = currentTime;
+                actuallyMoveButton();
+            }
+        }
 
         // Funkcja do przesuwania przycisku "Nie"
         function moveNoButton() {
