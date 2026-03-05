@@ -3,9 +3,8 @@
 A cute interactive Valentine's Day web card featuring Bubu & Dudu characters, animated hearts, and a sneaky "No" button that runs away from your cursor.
 
 <p align="center">
-  <img src="screenshot1.png" width="598" height="632" alt="Question screen" />
-  &nbsp;&nbsp;
-  <img src="screenshot2.png" width="598" height="632" alt="Celebration screen" />
+  <img src="screenshot1.png" width="45%" alt="Question screen" />
+  <img src="screenshot2.png" width="45%" alt="Celebration screen" />
 </p>
 
 ---
